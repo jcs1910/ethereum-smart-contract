@@ -2,7 +2,7 @@ const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
 const { interface, bytecode } = require('./compile.js');
 
-var provider = new HDWalletProvider(
+const provider = new HDWalletProvider(
   'aunt reason tortoise easily forget giggle era ice pizza click aspect skin',
   'https://rinkeby.infura.io/v3/618becb3ba9b4900986e8351a39a6291'
 );
