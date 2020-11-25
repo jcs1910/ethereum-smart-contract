@@ -1,15 +1,18 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.4.17;
 
 contract CrowdFundingFactory {
-    address[] public deployedCrowdFunding;
+    address[] public deployedCrowdFundings;
 
-    function createCrowdFunding(uint256 minimum) public {
-        address newCrowdFunding = address(new CrowdFunding(minimum));
-        deployedCrowdFunding.push(newCrowdFunding);
+    function createCrowdFunding(uint256 minimumContribution) public {
+        address newCrowdFunding = new CrowdFunding(
+            minimumContribution,
+            msg.sender
+        );
+        deployedCrowdFundings.push(newCrowdFunding);
     }
 
-    function getDeployedCrowdFunding() public view returns (address[] memory) {
-        return deployedCrowdFunding;
+    function getDeployedCrowdFundings() public view returns (address[]) {
+        return deployedCrowdFundings;
     }
 }
 
@@ -30,8 +33,8 @@ contract CrowdFunding {
     uint256 public totalContributors;
     Request[] public requests; // List of request from the manager needs to be approved before sending value
 
-    function CrowdFunding(uint256 minimum) public {
-        manager = msg.sender; // msg is a global variable
+    function CrowdFunding(uint256 minimum, address creator) public {
+        manager = creator; // msg is a global variable
         minimumContribution = minimum;
     }
 
