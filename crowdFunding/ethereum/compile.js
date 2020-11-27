@@ -11,10 +11,7 @@ const crowdFundingPath = path.resolve(
   'CrowdFunding.sol'
 );
 const source = fs.readFileSync(crowdFundingPath, 'utf8');
-console.log(source);
 const output = solc.compile(source, 1).contracts;
-
-console.log('output', output);
 
 fs.ensureDirSync(buildPath); //directory sync ensure
 for (let contract in output) {

@@ -12,6 +12,7 @@ contract CrowdFundingFactory {
     }
 
     function getDeployedCrowdFundings() public view returns (address[]) {
+        // view: not changing any data
         return deployedCrowdFundings;
     }
 }
@@ -28,7 +29,7 @@ contract CrowdFunding {
 
     // variables - contract storage
     address public manager;
-    mapping(address => bool) public contributors; //승인을 해주는 사람
+    mapping(address => bool) public contributors; // mapping has a constant time lookup, doesn't matter how many contributors are
     uint256 public minimumContribution;
     uint256 public totalContributors;
     Request[] public requests; // List of request from the manager needs to be approved before sending value
